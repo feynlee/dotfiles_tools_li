@@ -4,6 +4,7 @@
 [credential]
 	helper = cache
 [core]
+	excludesfile = /Users/ziyue/.gitignore_global
 	autocrlf = input
 [push]
 	default = simple

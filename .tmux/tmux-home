@@ -1,0 +1,11 @@
+#!/bin/sh
+tmux new-session -d -s 'data' -n 'Jupyter'
+tmux new-window -n 'code'
+tmux new-window -n 'bash'
+tmux send-keys -t 'data':'Jupyter' 'code' enter
+# tmux send-keys -t 'data':'Jupyter' 'pyspark' enter
+tmux send-keys -t 'data':'code' 'code' enter
+tmux send-keys -t 'data':'bash' 'cd ~' enter
+# tmux send-keys -t 'data':'datapipeline' 'vesta' enter
+tmux select-window -t 'data':'code'
+tmux attach-session -t 'data'
