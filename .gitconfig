@@ -1,0 +1,9 @@
+[user]
+	name = Ziyue Li
+	email = liziyue241@gmail.com
+[credential]
+	helper = cache
+[core]
+	autocrlf = input
+[push]
+	default = simple

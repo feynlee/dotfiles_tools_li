@@ -1,0 +1,9 @@
+**/.git/*
+**/tmp/swap/*
+**/tmp/backup/*
+**/Vundle.vim
+**/bundle/*
+**/.vim/view/*
+first_secrets/*
+
+!**/.gitkeep

@@ -1,0 +1,9 @@
+#!/bin/sh
+tmux new-session -d -s 'data' -n 'Jupyter'
+tmux new-window -c '~' -n 'code'
+tmux new-window -c '~/Code/EC2_dotfiles' -n 'dotfiles'
+tmux send-keys -t 'data':'code' 'conda update --all' enter
+tmux send-keys -t 'data':'dotfiles' 'git pull' enter
+tmux send-keys -t 'data':'dotfiles' 'stow -v -R -t ~ common tools_li' enter
+tmux select-window -t 'data':'Jupyter'
+tmux attach-session -t 'data'

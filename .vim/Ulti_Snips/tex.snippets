@@ -1,0 +1,870 @@
+extends texmath
+
+###########################################################################
+#                             LATEX SNIPPETS                              #
+###########################################################################
+
+snippet ref "\ref{}" i
+\ref{$1}
+endsnippet
+
+snippet cit "\cite{}" i
+\cite{$1}
+endsnippet
+
+snippet [ "[]" i
+[$1]
+endsnippet
+
+snippet { "{}" i
+{$1}
+endsnippet
+
+snippet ( "()" i
+($1)
+endsnippet
+
+snippet $ "$$" i
+$$1$
+endsnippet
+
+snippet sr "\sqrt{}" w
+\sqrt{$1}
+endsnippet
+
+snippet bar "\bar{}" i
+\bar{$1}
+endsnippet
+
+snippet vec "\vec{}" i
+\vec{$1}
+endsnippet
+
+snippet hat "\hat{}" i
+\hat{$1}
+endsnippet
+
+snippet til "\tilde{}" i
+\tilde{$1}
+endsnippet
+
+snippet tt "\text{}" i
+\text{$1}
+endsnippet
+
+snippet dd "_{}" i
+_{$1}
+endsnippet
+
+snippet uu "^{}" i
+^{$1}
+endsnippet
+
+snippet du "_{}^{}" i
+_{$1}^{$2}
+endsnippet
+
+snippet ud "^{}_{}" i
+^{$1}_{$2}
+endsnippet
+
+snippet / "\frac{}{}" i
+\frac{$1}{$2}
+endsnippet
+
+snippet df "\dfrac" i
+\dfrac{$1}{$2}
+endsnippet
+
+snippet sf "\sfrac{}{}" i
+\sfrac{$1}{$2}
+endsnippet
+
+snippet bi "\binom" i
+\binom{$1}{$2}
+endsnippet
+
+snippet nn "\nonumber" w
+\nonumber
+endsnippet
+
+snippet par "\partial" i
+\partial
+endsnippet
+
+snippet pd "\pd{}{}" w
+\pd{$1}{$2}
+endsnippet
+
+snippet bra "\langle |" i
+\langle $1 |
+endsnippet
+
+snippet ket "| \rangle" i
+| $1 \rangle
+endsnippet
+
+snippet bk "\langle | \rangle" i
+\langle $1 | $2 \rangle
+endsnippet
+
+snippet bsk "bra sth ket" i
+\langle $1 |$2| $3 \rangle
+endsnippet
+
+snippet lrb "\left[ \right]" i
+\left[ $1 \right]
+endsnippet
+
+snippet lrc "\left\{ \right\}" i
+\left\{ $1 \right\}
+endsnippet
+
+snippet lrp "\left( \right)" i
+\left( $1 \right)
+endsnippet
+
+snippet lr| "\left| \right|" i
+\left| $1 \right|
+endsnippet
+
+snippet mb "\mathbf" i
+\mathbf{$1}
+endsnippet
+
+snippet mc "\mathcal" i
+\mathcal{$1}
+endsnippet
+
+snippet msc "\mathscr" i
+\mathscr{$1}
+endsnippet
+
+snippet mr "\mathrm" i
+\mathrm{$1}
+endsnippet
+
+snippet mbb "\mathbb" i
+\mathbb{$1}
+endsnippet
+
+snippet bs "\boldsymbol" i
+\boldsymbol
+endsnippet
+
+snippet in "\int" w
+\int
+endsnippet
+
+snippet int "\int_{}^{}" w
+\int_{$1}^{$2}${3:dx}
+endsnippet
+
+snippet sum "\sum{}" i
+\sum$1{$2}
+endsnippet
+
+snippet prod "\prod" i
+\prod{$1}
+endsnippet
+
+snippet uar "\uparrow" i
+\uparrow
+endsnippet
+
+snippet dar "\downarrow" i
+\downarrow
+endsnippet
+
+snippet lar "\leftarrow" i
+\leftarrow
+endsnippet
+
+snippet rar "\rightarrow" i
+\rightarrow
+endsnippet
+
+snippet Rar "\Rightarrow" i
+\Rightarrow
+endsnippet
+
+snippet sin "\sin" i
+\sin
+endsnippet
+
+snippet cos "\cos" i
+\cos
+endsnippet
+
+snippet tan "\tan" i
+\tan
+endsnippet
+
+snippet cot "\cot" i
+\cot
+endsnippet
+
+snippet cosh "\cosh" i
+\cosh
+endsnippet
+
+snippet sinh "\sinh" i
+\sinh
+endsnippet
+
+snippet tanh "\tanh" i
+\tanh
+endsnippet
+
+snippet coth "\coth" i
+\coth
+endsnippet
+
+snippet log "\log" i
+\log
+endsnippet
+
+snippet inf "\infty" i
+\infty
+endsnippet
+
+snippet equi "\equiv" i
+\equiv
+endsnippet
+
+snippet le "\leq" i
+\leq
+endsnippet
+
+snippet ge "\geq" i
+\geq
+endsnippet
+
+snippet cr "\cref{}" w
+\cref{$1}
+endsnippet
+
+snippet er "\eref{}" w
+\eref{$1}
+endsnippet
+
+snippet erl "\erefl{}" w
+\eref{$1}{$2}
+endsnippet
+
+snippet ers "\erefs{}" w
+\eref{$1}{$2}
+endsnippet
+
+snippet fr "\fref{}" w
+\fref{$1}
+endsnippet
+
+snippet frs "\frefs{}" w
+\frefs{$1}{$2}
+endsnippet
+
+snippet tr "\tref{}" w
+\tref{$1}
+endsnippet
+
+snippet Sr "\sref{}" w
+\sref{$1}
+endsnippet
+
+snippet ar "\aref{}" w
+\aref{$1}
+endsnippet
+
+snippet Eq "Eq.~(ref)" w
+Eq.~($1)
+endsnippet
+
+snippet Fi "FIG.~\ref" w
+FIG.~($1)
+endsnippet
+
+snippet ttil "\texttildelow" i
+\texttildelow
+endsnippet
+
+snippet pr "()" i
+\left($1\right)
+endsnippet
+
+snippet cb "{}" i
+\left\{$1\right\}
+endsnippet
+
+snippet sb "[]" i
+\left[$1\right]
+endsnippet
+
+snippet pp "\perp" i
+\perp
+endsnippet
+
+snippet cd "\cdot" i
+\cdot
+endsnippet
+
+snippet cds "\cdots" i
+\cdots
+endsnippet
+
+snippet dag "\dagger" i
+\dagger
+endsnippet
+
+snippet cir "\circ" i
+\circ
+endsnippet
+
+snippet baa "\bar{a}" i
+\bar{a}
+endsnippet
+
+snippet bab "\bar{b}" i
+\bar{b}
+endsnippet
+
+snippet bac "\bar{c}" i
+\bar{c}
+endsnippet
+
+snippet bad "\bar{d}" i
+\bar{d}
+endsnippet
+
+snippet bae "\bar{e}" i
+\bar{e}
+endsnippet
+
+snippet baf "\bar{f}" i
+\bar{f}
+endsnippet
+
+snippet bag "\bar{g}" i
+\bar{g}
+endsnippet
+
+snippet bah "\bar{h}" i
+\bar{h}
+endsnippet
+
+snippet bai "\bar{i}" i
+\bar{i}
+endsnippet
+
+snippet baj "\bar{j}" i
+\bar{j}
+endsnippet
+
+snippet bak "\bar{k}" i
+\bar{k}
+endsnippet
+
+snippet bal "\bar{l}" i
+\bar{l}
+endsnippet
+
+snippet bam "\bar{m}" i
+\bar{m}
+endsnippet
+
+snippet ban "\bar{n}" i
+\bar{n}
+endsnippet
+
+snippet bao "\bar{o}" i
+\bar{o}
+endsnippet
+
+snippet bap "\bar{p}" i
+\bar{p}
+endsnippet
+
+snippet baq "\bar{q}" i
+\bar{q}
+endsnippet
+
+snippet baar "\bar{r}" i
+\bar{r}
+endsnippet
+
+snippet bas "\bar{s}" i
+\bar{s}
+endsnippet
+
+snippet bat "\bar{t}" i
+\bar{t}
+endsnippet
+
+snippet bau "\bar{u}" i
+\bar{u}
+endsnippet
+
+snippet bav "\bar{v}" i
+\bar{v}
+endsnippet
+
+snippet baw "\bar{w}" i
+\bar{w}
+endsnippet
+
+snippet bax "\bar{x}" i
+\bar{x}
+endsnippet
+
+snippet bay "\bar{y}" i
+\bar{y}
+endsnippet
+
+snippet baz "\bar{z}" i
+\bar{z}
+endsnippet
+
+snippet pha "phantom" w
+\phantom{$1}
+endsnippet
+
+snippet cc "\Cc" i
+\Cc
+endsnippet
+
+snippet ss "\Ss" i
+\Ss
+endsnippet
+
+snippet pv "\Pp" i
+\Pp
+endsnippet
+
+snippet prm "\prm" i
+\prm
+endsnippet
+
+snippet xx "\Xx" i
+\Xx
+endsnippet
+
+snippet qq "\Qq" i
+\Qq
+endsnippet
+
+snippet mut "\tilde{\mu}" i
+\muT
+endsnippet
+
+snippet nut "\tilde{\nu}" i
+\nuT
+endsnippet
+
+snippet uhat "\hat{u}" i
+\uT
+endsnippet
+
+snippet vhat "\hat{v}" i
+\vT
+endsnippet
+
+snippet ul "\tilde{u}" i
+\uL
+endsnippet
+
+snippet vl "\tilde{v}" i
+\vL
+endsnippet
+
+snippet mul "\hat{\mu}" i
+\muL
+endsnippet
+
+snippet nul "\hat{\nu}" i
+\nuL
+endsnippet
+
+snippet pt "\tilde{+}" i
+\pT
+endsnippet
+
+snippet mt "\tilde{-}" i
+\mT
+endsnippet
+
+snippet uni "\uniT{}" i
+\uniT{$1}
+endsnippet
+
+snippet itp "\itp{}" i
+\itP{$1}
+endsnippet
+
+snippet lf "\lf{}" i
+\lF{$1}
+endsnippet
+
+snippet hr "\href{}{}" i
+\href{$1}
+endsnippet
+
+#############################
+#   diary template          #
+#############################
+snippet ent "entry" !b
+\begin{entry}{$1}{$2}
+$3
+\end{entry}
+endsnippet
+
+###########################################################################
+#                            TEXTMATE SNIPPETS                            #
+###########################################################################
+
+#################
+# GENERAL STUFF #
+#################
+snippet begin "begin{} / end{}" w
+\begin{${1:something}}
+	${0:${VISUAL}}
+\end{$1}
+endsnippet
+
+####################
+# TABULARS, ARRAYS #
+####################
+
+snippet tab
+\begin{${1:t}${1/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}{${2:c}}
+$0${2/((?<=.)c|l|r)|./(?1: & )/g}
+\end{$1${1/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}
+endsnippet
+
+snippet ali "Align" b
+\begin{align}
+  $1
+  \label{eqn:$2}
+\end{align}
+endsnippet
+
+snippet alii "Align*" b
+\begin{align*}\label{eqn:$1}
+  $2
+\end{align*}
+endsnippet
+
+snippet arr "Array" w
+\begin{array}{$1}
+  $2
+\end{array}
+endsnippet
+
+snippet lab "label" i
+\label{$1}
+endsnippet
+
+snippet bma "bmatrix" w
+\begin{bmatrix}
+$1
+\end{bmatrix}
+endsnippet
+
+snippet pma "pmatrix" w
+\begin{pmatrix}
+$1
+\end{pmatrix}
+endsnippet
+
+snippet fm "fmffile" b
+\begin{fmffile}{$1}
+    \begin{fmfgraph*}($2,$3) %Sets size of Diagram
+    \fmfleft{$4}   %Sets there to be 2 sources
+    \fmfright{$5}    %Sets there to be 2  outputs
+    $6
+    \end{fmfgraph*}
+\end{fmffile}
+endsnippet
+
+snippet fmf "fmf" b
+\fmf{$1}{$2}
+endsnippet
+
+snippet table "table" b
+\begin{table}[${1:!}]
+  \caption{\label{tab:$2}$3}
+  \begin{ruledtabular}
+    \begin{tabular}{${4:c}}
+    $5
+    \\
+    $6
+    \end{tabular}
+  \end{ruledtabular}
+\end{table}
+endsnippet
+
+snippet lt "long table" b
+\begin{table*}[${1:!}]
+  \caption{\label{tab:$2}$3}
+  \begin{ruledtabular}
+    \begin{tabular}{${4:c}}
+    $5
+    \\
+    $6
+    \end{tabular}
+  \end{ruledtabular}
+\end{table*}
+endsnippet
+
+snippet fig "figure" b
+\begin{figure}[${1:!}]
+  \includegraphics[width=${2:\columnwidth}]{$3}
+  \caption{\label{fig:$4}$5}
+\end{figure}
+$6
+endsnippet
+
+snippet sf "subfigures" b
+\begin{figure}[${1:!}]
+\centering
+\subfigure[${2:Caption}]{
+\includegraphics[scale=${3:1}]{$4}
+\label{subfig:$5}
+}
+\subfigure[${6:Caption}]{
+\includegraphics[scale=${7:1}]{$8}
+\label{subfig:$8}
+}
+\end{figure}
+endsnippet
+
+snippet eqn "eqation" b
+\begin{equation}
+  $1
+  \label{$2}
+\end{equation}
+endsnippet
+
+snippet le "Long Equation" b
+\begin{widetext}
+  \begin{align} \label{eqn:$1}
+    \begin{split}
+    $2
+    \\
+    $3
+    \end{split}
+  \end{align}
+\end{widetext}
+endsnippet
+
+snippet spl "Split Equations" w
+\begin{align}
+  \begin{split} \label{$1}
+    $2
+    \\
+    $3
+  \end{split}
+\end{align}
+endsnippet
+
+snippet sube "subequations"
+\begin{subequations}\label{eqn:$1}
+  \begin{align}
+    $2 \label{subeqn-1:${3:$1} \\
+    ${4:\intertext{$5}}
+    $6
+    \label{subeqn-2:${7:$1}}
+  \end{align}
+\end{subequations}
+endsnippet
+
+########################
+# ENUM, DESCR, ITEMIZE #
+########################
+snippet enum "Enumerate" b
+\begin{enumerate}
+	\item $0
+\end{enumerate}
+endsnippet
+
+snippet item "Itemize" b
+\begin{itemize}
+	\item $0
+\end{itemize}
+endsnippet
+
+snippet desc "Description" b
+\begin{description}
+	\item[$1] $0
+\end{description}
+endsnippet
+
+#####################################
+# SECTIONS, CHAPTERS AND THERE LIKE #
+#####################################
+
+snippet part "Part" b
+\part{${1:part name}}
+\label{prt:${2:${1/(\w+)|\W+/(?1:\L$0\E:_)/g}}}
+
+${0}
+
+% part $2 (end)
+endsnippet
+
+snippet cha "Chapter" b
+\chapter{${1:chapter name}}
+\label{cha:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/g}}}
+
+${0}
+
+% chapter $2 (end)
+endsnippet
+
+snippet sec "Section" b
+\section{${1:section name}}
+\label{sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/g}}}
+
+${0}
+
+% section $2 (end)
+endsnippet
+
+
+snippet sub "Subsection" b
+\subsection{${1:subsection name}}
+\label{sub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/g}}}
+
+${0}
+
+% subsection $2 (end)
+endsnippet
+
+snippet ssub "Subsubsection" b
+\subsubsection{${1:subsubsection name}}
+\label{ssub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/g}}}
+
+${0}
+
+% subsubsection $2 (end)
+
+endsnippet
+
+snippet para "Paragraph" b
+\paragraph{${1:paragraph name}}
+\label{par:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/g}}}
+
+${0}
+
+% paragraph $2 (end)
+endsnippet
+
+
+snippet subp "Subparagraph" b
+\subparagraph{${1:subparagraph name}}
+\label{par:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/g}}}
+
+${0}
+
+% subparagraph $2 (end)
+endsnippet
+
+###################################################################
+# template
+###################################################################
+
+snippet tem "template" !b
+\documentclass[${1:aps},${2:reprint},notitlepage,superscriptaddress]{revtex4-1}
+% \documentclass{tufte-book}
+\usepackage{pdfsync}
+\usepackage{amsmath}  % need for subequations
+\usepackage{amsfonts} % note how statements can be commented out
+\usepackage{amssymb}
+\usepackage{MnSymbol}
+\usepackage{mathrsfs} % define the \mathscr font
+\usepackage{textcomp} % to define \texttildelow font
+\usepackage{bbm}
+\usepackage{float}    % suppress float figures and tables
+\usepackage{accents}  % put tilde under symbols using underaccent{}{}
+%\usepackage{undertilde} % for tilde under symbols
+% \usepackage{dsfont} % doublestroke fonts
+% \usepackage{bm}
+\usepackage{graphicx} % for figures
+\usepackage{mathtools}
+\usepackage{graphics}
+\usepackage{epsfig}
+%\usepackage[section]{placeins}
+\usepackage{multirow}
+\usepackage{bibentry}
+\usepackage{braket}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{slashed}
+%\usepackage{babel}
+%\usepackage{parskip}
+\usepackage{xfrac}
+\usepackage{xcolor}
+\usepackage{cases}
+\usepackage[retainorgcmds]{IEEEtrantools}
+% \usepackage[left=0.1in,top=0.6in,bottom=1in]{geometry}
+\usepackage[pdftex, pdfborder= 0 0 0, citecolor=blue, urlcolor=blue, linkcolor=blue, colorlinks=true, bookmarksopen=true]{hyperref}
+% \numberwithin{equation}{section}
+
+\setcounter{secnumdepth}{1}
+
+
+\graphicspath{${3:./figures/}}
+% \geometry{left=0.8in,right=2.8in}
+\hypersetup{pdftex, pdfborder= 0 0 0, citecolor=blue, urlcolor=blue, linkcolor=blue, colorlinks=true, bookmarksopen=true}
+
+% \title{title}
+% \author{Ziyue Li}
+
+\newcommand{\pd}[2]{\frac{\partial{#1}}{\partial{#2}}}
+%\newcommand{\Cc}{\mathbb{C}}
+%\newcommand{\Ss}{\mathbb{S}}
+%\newcommand{\Pp}{\mathbb{P}}
+%\newcommand{\Qq}{\mathrm{q}}
+%\newcommand{\Xx}{\mathbb{X}}
+%\newcommand{\pT}{\hat{+}}
+%\newcommand{\mT}{\hat{-}}
+%\newcommand{\muT}{\hat{\mu}}
+%\newcommand{\nuT}{\hat{\nu}}
+%\newcommand{\uniT}[1]{\mathring{#1}}
+%\newcommand{\uT}{\hat{u}}
+%\newcommand{\vT}{\hat{v}}
+%\newcommand{\uL}{\tilde{u}}
+%\newcommand{\vL}{\tilde{v}}
+%\newcommand{\itP}[1]{\hat{#1}}
+%\newcommand{\lF}[1]{\tilde{#1}}
+
+
+\begin{document}
+\title{$4}
+\author{Ziyue Li}
+\affiliation{Department of Physics, North Carolina State University, Raleigh, North Carolina 27695-8202}
+\author{Chueng-Ryong Ji}
+\affiliation{Department of Physics, North Carolina State University, Raleigh, North Carolina 27695-8202}
+
+\begin{abstract}
+${5:To be finished.}
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+\label{sec:introduction}
+
+${6:To be finished.}
+
+% section introduction (end)
+
+$7
+
+\end{document}
+endsnippet
+
+
+# vim:ft=snippets:

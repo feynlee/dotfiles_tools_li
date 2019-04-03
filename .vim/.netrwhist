@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/Users/ziyueli/.vim/startup'
+let g:netrw_dirhist_2='/Users/ziyue/OneDrive/Programming/Python/Dataincubator/test/Sumbission_form'
+let g:netrw_dirhist_3='/Users/ziyue/OneDrive/Code/sites/jekyll-gulp-sass-browser-sync-master'
+let g:netrw_dirhist_4='/Users/ziyue/Code/dotfiles/.vim/bundle/Vundle.vim'
