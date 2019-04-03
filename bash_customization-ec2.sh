@@ -6,6 +6,11 @@ if which tmux >/dev/null 2>&1; then
     test -z "$TMUX" && (tmux attach || tmux-ec2)
 fi
 
+
+alias dott='cd ~/Code/dotfiles/dotfiles_tools_li'
+
+
+# VIM
 recompile_ycm() {
     cd ~/.vim/bundle/YouCompleteMe
     python ./install.py
