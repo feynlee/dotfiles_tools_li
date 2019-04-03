@@ -72,6 +72,10 @@ sync_reports() {
 	aws cloudfront create-invalidation --distribution-id EHIS1O5LAO3RR --paths '/*'
 }
 
+update_secrets() {
+	scp -i ~/.ssh/ziyueli_first.pem ~/Code/dotfiles/first_secrets ubuntu@$1:~/Code/dotfiles
+}
+
 # ssh
 ec2_li() {
     ssh -i ~/.ssh/ziyueli_first.pem ubuntu@$@
