@@ -8,6 +8,7 @@ fi
 
 
 alias dott='cd ~/Code/dotfiles/dotfiles_tools_li'
+alias et='vim ~/Code/dotfiles/dotfiles_tools_li/.tmux/tmux-ec2'
 
 
 # VIM
