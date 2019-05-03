@@ -6,6 +6,9 @@ tmux new-window -c ~/Code/dotfiles/EC2_dotfiles -n 'EC2_dotfiles'
 tmux new-window -c ~/Code/dotfiles/dotfiles_tools_li -n 'dotfiles_tools_li'
 tmux new-window -c ~/Code/cortex -n 'cortex'
 tmux new-window -c ~/Code/davinci -n 'davinci'
+tmux send-keys -t 'data':'code' 'sudo apt-get update -y' enter
+tmux send-keys -t 'data':'code' 'sudo apt-get upgrade -y' enter
+tmux send-keys -t 'data':'code' 'sudo apt-get dist-upgrade' enter
 tmux send-keys -t 'data':'code' 'conda update --all --yes' enter
 tmux send-keys -t 'data':'EC2_dotfiles' 'git pull' enter
 tmux send-keys -t 'data':'dotfiles_tools_li' 'git pull' enter
