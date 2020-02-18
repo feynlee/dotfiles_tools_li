@@ -1,9 +1,9 @@
 # TMUX: auto setup tmux session when log in
 export PATH=$PATH:$HOME/.tmux:~/App_build
-if which tmux >/dev/null 2>&1; then
-	#if not inside a tmux session, and if no session is started, start a new session
-	test -z "$TMUX" && (tmux attach || tmux-home)
-fi
+# if which tmux >/dev/null 2>&1; then
+# 	#if not inside a tmux session, and if no session is started, start a new session
+# 	test -z "$TMUX" && (tmux attach || tmux-home)
+# fi
 
 # CONDA
 # added by Anaconda3 5.1.0 installer
@@ -28,6 +28,27 @@ git_delete_branch () {
 recompile_ycm() {
 	cd ~/.vim/bundle/youcompleteme
 	/usr/local/bin/python3 ./install.py
+}
+
+# FAST.AI
+fastai_old() {
+	ZONE="us-west2-b" # budget: "us-west1-b"
+	INSTANCE_NAME="my-fastai-instance"
+	gcloud compute ssh --zone=$ZONE jupyter@$INSTANCE_NAME -- -L 8080:localhost:8080
+}
+
+fastai() {
+	ZONE="us-east1-c" # budget: "us-west1-b"
+	INSTANCE_NAME="my-fastai-instance-2"
+	gcloud compute ssh --zone=$ZONE jupyter@$INSTANCE_NAME -- -L 8080:localhost:8080
+}
+
+fastai_p() {
+	ZONE="us-west1-b" # budget: "us-west1-b"
+	INSTANCE_NAME="my-fastai-instance-persistant"
+	gcloud compute ssh --zone=$ZONE jupyter@$INSTANCE_NAME -- -L 8080:localhost:8080
+	# gcloud beta compute --project "famous-design-243419" ssh --zone "us-west1-b" "my-fastai-instance-persistant" -- -L 8080:localhost:8080
+
 }
 
 # RUBY

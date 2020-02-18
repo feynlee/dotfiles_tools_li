@@ -3,18 +3,20 @@ export DAVINCI_HOME="$CODE_HOME/Data_analysis/First/davinci/"
 export VESTA_HOME="$CODE_HOME/Data_analysis/First/vesta/"
 export DATA_HOME="$CODE_HOME/Data_analysis/First/data/"
 export PYTHONPATH=$PYTHONPATH:$DAVINCI_HOME
+export PYTHONPATH=$PYTHONPATH:/Applications/Python_libs/aws-glue-libs
 export PATH=$PATH:$PYTHONPATH
 export PATH=$PATH:~/App_build
 
 export HADOOP_OPTS="-Djava.library.path=$HADOOP_INSTALL/lib/native"
 export PYTHONIOENCODING="utf-8"
+export PYTHONDONTWRITEBYTECODE=""
 
 export JAVA_HOME="$(/usr/libexec/java_home)"
 # export JAVA_HOME="/Library/Java/Home"
-export SPARK_HOME=/Applications/App_build/spark-2.4.0-bin-hadoop2.7
+export SPARK_HOME=/Applications/App_build/spark-2.4.3-bin-hadoop2.8
 export PYSPARK_DRIVER_PYTHON="jupyter"
 export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
-export PYSPARK_PYTHON="/Applications/Anaconda3/envs/py3/bin/python"
+export PYSPARK_PYTHON="/Applications/Anaconda3/envs/py37/bin/python"
 export SFN_DIR="/Users/ziyue/Code/Data_Analysis/First/state_machines_ds"
 
 alias hstart="/usr/local/Cellar/hadoop/2.6.0/sbin/start-dfs.sh;/usr/local/Cellar/hadoop/2.6.0/sbin/start-yarn.sh"
@@ -24,15 +26,24 @@ alias zepstop="~/App_build/zeppelin-0.7.1-bin-all/bin/zeppelin-daemon.sh stop"
 
 # data
 first_lftp () {
-	lftp -p 22 -u $CI_FTP_USERNAME,$CI_FTP_PASSWORD sftp://sfgext.acxiom.com
+	# lftp -p 22 -u $CI_FTP_USERNAME,$CI_FTP_PASSWORD sftp://sfgext.acxiom.com
+	lftp -p 22 -u $ftp_username,$ftp_password sftp://sfgext.acxiom.com
 }
 
 get_premover() {
-	/Applications/anaconda3/envs/py27/bin/python $FIRST_HOME/pipeline/premover/premover_download_upload.py $1 $2
+	# /Applications/anaconda3/envs/py27/bin/python $FIRST_HOME/pipeline/premover/premover_download_upload.py $1 $2
+	conda deactivate
+	conda activate py37
+	python $FIRST_HOME/pipeline/premover/premover_download_upload.py $1 $2
+	conda deactivate
 }
 
-load_scored_data_to_predictive_people() {
-	python $FIRST_HOME/augment-services/resources/databricks/predictive-people/start_load.py "$@"
+load_scored_data_to_predictive_addresses() {
+	conda deactivate
+	conda activate py27
+	which python
+	python $FIRST_HOME/augment-services/resources/databricks/predictive-addresses/start_load.py "$@"
+	conda deactivate
 }
 
 presign_url() {
@@ -41,17 +52,24 @@ presign_url() {
 
 # sync
 sync_spark() {
+	conda activate py37
 	# sync vesta folder
 	aws s3 sync $FIRST_HOME/vesta/vesta/ s3://first-io-datalake-production/user/Li/code/vesta/ --exclude "*.git/*" --exclude ".idea/*" --delete
 	# zip davinci package
-	cd $FIRST_HOME
-	cd davinci
+	cd $FIRST_HOME/davinci/src
 	rm davinci.zip
 	zip -r davinci.zip davinci
 	# sync davinci package
-	aws s3 sync $FIRST_HOME/davinci/ s3://first-io-datalake-production/user/Li/code/davinci/ --exclude "*.git/*" --exclude ".idea/*" --delete
+	aws s3 sync $FIRST_HOME/davinci/ s3://first-io-datalake-production/user/Li/code/davinci/ --exclude "*.git/*" --exclude ".idea/*" --exclude "__pycache__/*" --exclude "*.pyc" --exclude "*.DS_Store" --delete
 	# sync serects
-	aws s3 cp $HOME/.davinci_secrets.yml s3://first-io-datalake-production/user/Li/code/.davinci_secrets.yml
+	aws s3 cp $HOME/.davinci/secrets.yaml s3://first-io-datalake-production/user/Li/code/.davinci/secrets.yaml
+	# generate and sync config table
+	cd $FIRST_HOME/vesta/tasks
+	conda deactivate
+	conda activate py37
+	python $FIRST_HOME/vesta/tasks/Make_config_tables.py
+	conda deactivate
+	cd ~
 }
 
 
@@ -70,6 +88,11 @@ sync_reports() {
 	conda deactivate
 	aws s3 sync $FIRST_HOME/data_analysis/reports s3://first-io-data-analysis/data_science --include "*.html" --exclude "*.DS_Store" --exclude ".*" --exclude "*.py" --delete
 	aws cloudfront create-invalidation --distribution-id EHIS1O5LAO3RR --paths '/*'
+}
+
+sync_batch_scripts() {
+	# aws s3 sync $FIRST_HOME/pipeline/automation s3://first-io-datalake-production/user/Li/code/automation --exclude "*.csv" --exclude "*.xlsx" --exclude "*.ipynb" --exclude "*.log" --exclude ".*" --exclude "*/.*" --delete
+	aws s3 sync $FIRST_HOME/pipeline/automation s3://first-io-datalake-production/user/Li/code/automation --exclude "*" --include "*.py" --exclude "*.ipynb_checkpoints*" --delete
 }
 
 update_secrets() {
@@ -107,6 +130,12 @@ spark_test() {
 
 
 # utilities
+add_kernel() {
+	conda activate $1
+	python -m ipykernel install --user --name $1
+}
+
+
 convertshape() {
 	ogr2ogr -f "ESRI Shapefile" $FIRST_HOME/input/shapefiles/$1.shp $FIRST_HOME/input/shapefiles/$1.kml
 }
@@ -132,7 +161,12 @@ delete_sfn_and_lambdas () {
 	python delete.py
 }
 
-
+# Tools
+lab () {
+	conda activate py37
+	code
+	jupyter lab
+}
 
 #####################################################
 # old functions for county models (to be deprecated)
