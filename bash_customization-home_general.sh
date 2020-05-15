@@ -51,6 +51,12 @@ fastai_p() {
 
 }
 
+fastai_download() {
+	ZONE="us-west1-b" # budget: "us-west1-b"
+	INSTANCE_NAME="my-fastai-instance-persistant"
+	gcloud compute scp $INSTANCE_NAME:$1 $2 --zone $ZONE
+  }
+
 # RUBY
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 

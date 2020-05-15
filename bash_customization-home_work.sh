@@ -34,13 +34,13 @@ get_premover() {
 	# /Applications/anaconda3/envs/py27/bin/python $FIRST_HOME/pipeline/premover/premover_download_upload.py $1 $2
 	conda deactivate
 	conda activate py37
-	python $FIRST_HOME/pipeline/premover/premover_download_upload.py $1 $2
+	python $FIRST_HOME/list_scoring_projects/pipeline/premover/premover_download_upload.py $1 $2
 	conda deactivate
 }
 
 load_scored_data_to_predictive_addresses() {
 	conda deactivate
-	conda activate py27
+	conda activate py37
 	which python
 	python $FIRST_HOME/augment-services/resources/databricks/predictive-addresses/start_load.py "$@"
 	conda deactivate
@@ -104,6 +104,10 @@ ec2_li() {
     ssh -i ~/.ssh/ziyueli_first.pem ubuntu@$@
 }
 
+ec2_li_L() {
+    ssh -i ~/.ssh/ziyueli_first.pem -L 8787:localhost:8787 ubuntu@$@
+}
+
 ec2_li_bastion() {
     ssh -i ~/.ssh/ziyueli_first.pem ubuntu@$1
 }
@@ -153,6 +157,13 @@ dockerBuildFetchAndRun () {
 	docker push 485000428307.dkr.ecr.us-west-2.amazonaws.com/fetch_and_run:latest
 }
 
+dockerBuildDask () {
+	cd $FIRST_HOME/ECR_images/dask
+	docker build -t dask_cluster:$1 .
+	docker tag dask_cluster:$1 485000428307.dkr.ecr.us-west-2.amazonaws.com/dask_cluster:$1
+	aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 485000428307.dkr.ecr.us-west-2.amazonaws.com/dask_cluster
+	docker push 485000428307.dkr.ecr.us-west-2.amazonaws.com/dask_cluster:$1
+}
 
 # AWS
 delete_sfn_and_lambdas () {
