@@ -1,9 +1,24 @@
 #!/bin/sh
 tmux new-session -d -s 'data' -n 'Jupyter'
-tmux new-window -c '~' -n 'code'
-tmux new-window -c '~/Code/EC2_dotfiles' -n 'dotfiles'
-tmux send-keys -t 'data':'code' 'conda update --all' enter
-tmux send-keys -t 'data':'dotfiles' 'git pull' enter
+tmux new-window -c ~/Code -n 'code'
+tmux new-window -c ~/Code/dotfiles -n 'dotfiles'
+tmux new-window -c ~/Code/dotfiles/EC2_dotfiles -n 'EC2_dotfiles'
+tmux new-window -c ~/Code/dotfiles/dotfiles_tools_li -n 'dotfiles_tools_li'
+tmux new-window -c ~/Code/davinci -n 'davinci'
+tmux new-window -c ~/Code/vesta -n 'vesta'
+tmux new-window -c ~/Code/fastcore -n 'fastcore'
+tmux new-window -c ~/Code/fastai2 -n 'fastai2'
+tmux send-keys -t 'data':'code' 'sudo apt-get update -y' enter
+tmux send-keys -t 'data':'code' 'sudo apt-get upgrade -y' enter
+tmux send-keys -t 'data':'code' 'sudo apt-get dist-upgrade -y' enter
+tmux send-keys -t 'data':'code' 'sudo apt autoremove -y' enter
+tmux send-keys -t 'data':'code' 'conda update --all --yes' enter
+tmux send-keys -t 'data':'EC2_dotfiles' 'git pull' enter
+tmux send-keys -t 'data':'dotfiles_tools_li' 'git pull' enter
+tmux send-keys -t 'data':'vesta' 'git pull' enter
+tmux send-keys -t 'data':'davinci' 'git pull' enter
+tmux send-keys -t 'data':'fastcore' 'git pull' enter
+tmux send-keys -t 'data':'fastai2' 'git pull' enter
 tmux send-keys -t 'data':'dotfiles' 'stow -v -R -t ~ *' enter
 tmux select-window -t 'data':'Jupyter'
 tmux attach-session -t 'data'
