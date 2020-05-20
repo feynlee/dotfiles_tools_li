@@ -47,9 +47,9 @@ Plugin 'klen/python-mode'
 Plugin 'derekwyatt/vim-scala'
 
 " Html, Markdown plugin
-Plugin 'mattn/emmet-vim'
-Plugin 'Yggdroot/indentLine'
-Plugin 'suan/vim-instant-markdown'
+" Plugin 'mattn/emmet-vim'
+" Plugin 'Yggdroot/indentLine'
+" Plugin 'suan/vim-instant-markdown'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 

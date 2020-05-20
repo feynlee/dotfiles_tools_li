@@ -35,6 +35,8 @@ source ~/.vim/startup/easymotion.vim
 source ~/.vim/startup/tcomment.vim
 " source ~/.vim/startup/yankring.vim
 source ~/.vim/startup/neocomplcache.vim
+source ~/.vim/startup/vim-markdown.vim
+
 " source ~/.vim/startup/gundo.vim
 " source ~/.vim/startup/taglist.vim
 " Git plugins
