@@ -1,7 +1,7 @@
 export FIRST_HOME="$CODE_HOME/Data_analysis/First"
-export DAVINCI_HOME="$CODE_HOME/Data_analysis/First/davinci/"
-export VESTA_HOME="$CODE_HOME/Data_analysis/First/vesta/"
-export DATA_HOME="$CODE_HOME/Data_analysis/First/data/"
+export DAVINCI_HOME="$CODE_HOME/Data_analysis/First/davinci"
+export VESTA_HOME="$CODE_HOME/Data_analysis/First/vesta"
+export DATA_HOME="$CODE_HOME/Data_analysis/First/data"
 export PYTHONPATH=$PYTHONPATH:$DAVINCI_HOME
 export PYTHONPATH=$PYTHONPATH:/Applications/Python_libs/aws-glue-libs
 export PATH=$PATH:$PYTHONPATH
@@ -95,8 +95,12 @@ sync_batch_scripts() {
 	aws s3 sync $FIRST_HOME/pipeline/automation s3://first-io-datalake-production/user/Li/code/automation --exclude "*" --include "*.py" --exclude "*.ipynb_checkpoints*" --delete
 }
 
-update_secrets() {
+upload_first_secrets() {
 	scp -i ~/.ssh/ziyueli_first.pem ~/Code/dotfiles/first_secrets ubuntu@$1:~/Code/dotfiles
+}
+
+update_secrets() {
+	python $DAVINCI_HOME/update_secrets.py
 }
 
 # ssh
