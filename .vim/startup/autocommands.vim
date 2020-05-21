@@ -41,6 +41,10 @@ au BufEnter ~/Code/dotfiles/.vim/vimrc nnoremap <buffer> ,e  :e ~/.vim/startup/
 au BufEnter ~/.vimrc inoremap <buffer> ,so source ~/.vim/startup/
 au BufEnter ~/.vimrc nnoremap <buffer> ,e  :e ~/.vim/startup/
 
+" set filetypes
+autocmd BufNewFile,BufRead *.zsh   set syntax=bash
+autocmd BufNewFile,BufRead *.zsh-theme   set syntax=bash
+
 au FilterWritePre * if &diff | setlocal wrap< | endif
 " automatically source configuration files
 autocmd! BufWritePost ~/.vimrc source %
