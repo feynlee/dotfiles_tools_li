@@ -9,6 +9,8 @@ export PATH=$PATH:$HOME/.tmux:~/App_build
 # added by Anaconda3 5.1.0 installer
 export PATH="/Applications/anaconda3/bin:$PATH"
 
+alias link_dotfiles="stow -v -R -t ~ ."
+
 add_conda_kernels () {
 	conda activate py3
 	python -m ipykernel install --user --name myenv --display-name "py3"
