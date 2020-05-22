@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 tmux new-session -d -s 'data' -n 'Jupyter'
 tmux new-window -n 'code'
 tmux new-window -n 'bash'
