@@ -46,8 +46,10 @@ gcdot () {
 	cwd=$(pwd)
 	cd $DOTFILES_HOME/dotfiles_home
 	git commit -am '${1}'
+	git push
 	cd $DOTFILES_HOME/dotfiles_tools_li
 	git commit -am '${1}'
+	git push
 	cd $cwd
 }
 
