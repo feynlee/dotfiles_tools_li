@@ -2,8 +2,8 @@ export FIRST_HOME="$CODE_HOME/Data_analysis/First"
 export DAVINCI_HOME="$CODE_HOME/Data_analysis/First/davinci"
 export VESTA_HOME="$CODE_HOME/Data_analysis/First/vesta"
 export DATA_HOME="$CODE_HOME/Data_analysis/First/data"
-export PYTHONPATH=$PYTHONPATH:$DAVINCI_HOME
-export PYTHONPATH=$PYTHONPATH:/Applications/Python_libs/aws-glue-libs
+export PYTHONPATH=$PYTHONPATH:/Applications/Anaconda3
+# export PYTHONPATH=$PYTHONPATH:/Applications/Python_libs/aws-glue-libs
 export PATH=$PATH:$PYTHONPATH
 export PATH=$PATH:~/App_build
 
