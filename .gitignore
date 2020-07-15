@@ -57,3 +57,4 @@ tags
 **/.vim/view/*
 
 !**/.gitkeep
+.ohmyzsh_customization/plugins/

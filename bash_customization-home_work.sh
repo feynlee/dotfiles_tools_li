@@ -11,7 +11,7 @@ export HADOOP_OPTS="-Djava.library.path=$HADOOP_INSTALL/lib/native"
 export PYTHONIOENCODING="utf-8"
 export PYTHONDONTWRITEBYTECODE=""
 
-export JAVA_HOME="$(/usr/libexec/java_home)"
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 # export JAVA_HOME="/Library/Java/Home"
 export SPARK_HOME=/Applications/App_build/spark-2.4.3-bin-hadoop2.8
 export PYSPARK_DRIVER_PYTHON="jupyter"
@@ -51,6 +51,11 @@ presign_url() {
 }
 
 # sync
+update_code_versions() {
+	aws s3 cp ~/Code/Data_Analysis/First/vesta/experiment_versions/code_versions.json s3://first-io-datalake-production/data/output/vesta/experiments_metadata/code_versions.json
+}
+
+
 sync_spark() {
 	conda activate py37
 	# sync vesta folder
