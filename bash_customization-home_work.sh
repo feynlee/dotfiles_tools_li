@@ -1,5 +1,5 @@
 export FIRST_HOME="$CODE_HOME/Data_analysis/First"
-export DAVINCI_HOME="$CODE_HOME/Data_analysis/First/davinci"
+export DAVINCI_HOME="$CODE_HOME/Data_analysis/First/davinci2/davinci2"
 export VESTA_HOME="$CODE_HOME/Data_analysis/First/vesta"
 export DATA_HOME="$CODE_HOME/Data_analysis/First/data"
 export PYTHONPATH=$PYTHONPATH:/Applications/Anaconda3
@@ -38,11 +38,15 @@ get_premover() {
 	conda deactivate
 }
 
+sync_score_importing_scripts() {
+	$FIRST_HOME/augment-services/resources/emr/predictive-addresses/make_and_upload_files.sh
+}
+
 load_scored_data_to_predictive_addresses() {
 	conda deactivate
 	conda activate py37
 	which python
-	python $FIRST_HOME/augment-services/resources/databricks/predictive-addresses/start_load.py "$@"
+	python $FIRST_HOME/augment-services/resources/emr/predictive-addresses/start_load.py "$@"
 	conda deactivate
 }
 
@@ -51,6 +55,11 @@ presign_url() {
 }
 
 # sync
+# update docs on Heroku
+sync_to_heroku () {
+	git subtree push --prefix docs/ heroku master
+}
+
 update_code_versions() {
 	aws s3 cp ~/Code/Data_Analysis/First/vesta/experiment_versions/code_versions.json s3://first-io-datalake-production/data/output/vesta/experiments_metadata/code_versions.json
 }
@@ -106,6 +115,7 @@ upload_first_secrets() {
 
 update_secrets() {
 	python $DAVINCI_HOME/update_secrets.py
+	aws s3 cp ~/.davinci/secrets.yaml s3://first-io-datalake-production/user/Shared/code/.davinci/secrets.yaml
 }
 
 # ssh

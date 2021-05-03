@@ -43,7 +43,7 @@ map H ^
 " end of the row
 map L $
 nmap <silent> gl <C-]>
-let mapleader = " "
+" let mapleader = " "
 " Window mappings
 nmap <silent> ,j :wincmd j <CR>
 nmap <silent> ,k :wincmd k <CR>
