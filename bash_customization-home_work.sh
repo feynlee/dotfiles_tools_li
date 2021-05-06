@@ -64,6 +64,12 @@ update_code_versions() {
 	aws s3 cp ~/Code/Data_Analysis/First/vesta/experiment_versions/code_versions.json s3://first-io-datalake-production/data/output/vesta/experiments_metadata/code_versions.json
 }
 
+update_config() {
+	conda activate py37
+	python $FIRST_HOME/vesta/tasks/Make_config_tables.py
+	conda deactivate
+}
+
 
 sync_spark() {
 	conda activate py37
