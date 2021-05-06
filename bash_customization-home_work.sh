@@ -65,6 +65,7 @@ update_code_versions() {
 }
 
 update_config() {
+	cd $FIRST_HOME/vesta/tasks
 	conda activate py37
 	python $FIRST_HOME/vesta/tasks/Make_config_tables.py
 	conda deactivate
