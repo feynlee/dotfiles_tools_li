@@ -1,5 +1,8 @@
 # TMUX: auto setup tmux session when log in
 export PATH=$PATH:$HOME/.tmux:~/App_build
+export LDFLAGS="-L/usr/local/opt/openssl/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl/include"
+export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig"
 #if which tmux >/dev/null 2>&1 &&; then
 #	if ! tmux has-session -t data >/dev/null 2>&1; then
 #		#if not inside a tmux session, and if no session is started, start a new session
@@ -87,26 +90,38 @@ gpull_cleanup () {
 	git_delete_branch $branch
 }
 
+gpup () {
+	branch=$(git branch --show-current)
+	git push --set-upstream origin $branch
+}
+
 # VIM
-recompile_ycm() {
+recompile_ycm () {
 	cd ~/.vim/bundle/youcompleteme
 	/usr/local/bin/python3 ./install.py
 }
 
+# nbdev
+nbdev_proc () {
+	nbdev_build_lib
+	nbdev_build_docs
+	nbdev_diff_nbs
+}
+
 # FAST.AI
-fastai_old() {
+fastai_old () {
 	ZONE="us-west2-b" # budget: "us-west1-b"
 	INSTANCE_NAME="my-fastai-instance"
 	gcloud compute ssh --zone=$ZONE jupyter@$INSTANCE_NAME -- -L 8080:localhost:8080
 }
 
-fastai() {
+fastai () {
 	ZONE="us-east1-c" # budget: "us-west1-b"
 	INSTANCE_NAME="my-fastai-instance-2"
 	gcloud compute ssh --zone=$ZONE jupyter@$INSTANCE_NAME -- -L 8080:localhost:8080
 }
 
-fastai_p() {
+fastai_p () {
 	ZONE="us-west1-b" # budget: "us-west1-b"
 	INSTANCE_NAME="my-fastai-instance-persistant"
 	gcloud compute ssh --zone=$ZONE jupyter@$INSTANCE_NAME -- -L 8080:localhost:8080
@@ -114,7 +129,7 @@ fastai_p() {
 
 }
 
-fastai_download() {
+fastai_download () {
 	ZONE="us-west1-b" # budget: "us-west1-b"
 	INSTANCE_NAME="my-fastai-instance-persistant"
 	gcloud compute scp $INSTANCE_NAME:$1 $2 --zone $ZONE
@@ -125,3 +140,6 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+
+export PATH=/usr/local/opt/openssl/bin:$PATH

@@ -1,5 +1,5 @@
 export FIRST_HOME="$CODE_HOME/Data_analysis/First"
-export DAVINCI_HOME="$CODE_HOME/Data_analysis/First/davinci2/davinci2"
+export DAVINCI_HOME="$CODE_HOME/Data_analysis/First/davinci"
 export VESTA_HOME="$CODE_HOME/Data_analysis/First/vesta"
 export DATA_HOME="$CODE_HOME/Data_analysis/First/data"
 export PYTHONPATH=$PYTHONPATH:/Applications/Anaconda3
@@ -34,7 +34,7 @@ get_premover() {
 	# /Applications/anaconda3/envs/py27/bin/python $FIRST_HOME/pipeline/premover/premover_download_upload.py $1 $2
 	conda deactivate
 	conda activate py37
-	python $FIRST_HOME/list_scoring_projects/pipeline/premover/premover_download_upload.py $1 $2
+	python $FIRST_HOME/vesta/scripts/data_processing/premover_download_upload.py $1 $2
 	conda deactivate
 }
 
@@ -42,11 +42,18 @@ sync_score_importing_scripts() {
 	$FIRST_HOME/augment-services/resources/emr/predictive-addresses/make_and_upload_files.sh
 }
 
+
+exec_vesta_pipeline() {
+	conda deactivate
+	conda activate py37
+	python $FIRST_HOME/automation-services/vesta_pipeline/scripts/exec_vesta_pipeline.py "$@"
+}
+
 load_scored_data_to_predictive_addresses() {
 	conda deactivate
 	conda activate py37
 	which python
-	python $FIRST_HOME/augment-services/resources/emr/predictive-addresses/start_load.py "$@"
+	python $FIRST_HOME/automation-services/vesta_pipeline/scripts/import_scores.py "$@"
 	conda deactivate
 }
 
@@ -60,14 +67,14 @@ sync_to_heroku () {
 	git subtree push --prefix docs/ heroku master
 }
 
-update_code_versions() {
-	aws s3 cp ~/Code/Data_Analysis/First/vesta/experiment_versions/code_versions.json s3://first-io-datalake-production/data/output/vesta/experiments_metadata/code_versions.json
-}
+# update_code_versions() {
+# 	aws s3 cp ~/Code/Data_Analysis/First/vesta/experiment_versions/code_versions.json s3://first-io-datalake-production/data/output/vesta/experiments_metadata/code_versions.json
+# }
 
 update_config() {
 	cd $FIRST_HOME/vesta/tasks
 	conda activate py37
-	python $FIRST_HOME/vesta/tasks/Make_config_tables.py
+	python $FIRST_HOME/vesta/scripts/tasks/Make_config_tables.py
 	conda deactivate
 }
 
@@ -75,9 +82,9 @@ update_config() {
 sync_spark() {
 	conda activate py37
 	# sync vesta folder
-	aws s3 sync $FIRST_HOME/vesta/vesta/ s3://first-io-datalake-production/user/Li/code/vesta/ --exclude "*.git/*" --exclude ".idea/*" --delete
+	aws s3 sync $FIRST_HOME/vesta/ s3://first-io-datalake-production/user/Li/code/vesta/ --exclude "*.git/*" --exclude ".idea/*" --delete
 	# zip davinci package
-	cd $FIRST_HOME/davinci/src
+	cd $FIRST_HOME/davinci/
 	rm davinci.zip
 	zip -r davinci.zip davinci
 	# sync davinci package
@@ -85,11 +92,7 @@ sync_spark() {
 	# sync serects
 	aws s3 cp $HOME/.davinci/secrets.yaml s3://first-io-datalake-production/user/Li/code/.davinci/secrets.yaml
 	# generate and sync config table
-	cd $FIRST_HOME/vesta/tasks
-	conda deactivate
-	conda activate py37
-	python $FIRST_HOME/vesta/tasks/Make_config_tables.py
-	conda deactivate
+	update_config()
 	cd ~
 }
 
@@ -127,7 +130,7 @@ update_secrets() {
 
 # ssh
 ec2_li() {
-    ssh -i ~/.ssh/ziyueli_first.pem ubuntu@$@
+    ssh -o IdentitiesOnly=yes -i ~/.ssh/ziyueli_first.pem ubuntu@$@
 }
 
 ec2_li_L() {
@@ -158,6 +161,9 @@ spark_test() {
 	ssh -i ~/.ssh/test-cal.pem hadoop@$1
 }
 
+port_forwarding() {
+	ssh -i ~/.ssh/ziyueli_first.pem -N -f -L $1:localhost:8888 ubuntu@$2
+}
 
 # utilities
 add_kernel() {
