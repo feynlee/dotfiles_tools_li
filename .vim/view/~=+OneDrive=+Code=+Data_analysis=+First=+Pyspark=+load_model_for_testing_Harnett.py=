@@ -1,0 +1,33 @@
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+argglobal
+setlocal fdm=expr
+setlocal fde=pymode#folding#expr(v:lnum)
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+22
+normal! zo
+27
+normal! zo
+32
+normal! zo
+37
+normal! zo
+42
+normal! zo
+94
+normal! zo
+100
+normal! zo
+104
+normal! zo
+154
+normal! zo
+169
+normal! zo
+let &so = s:so_save | let &siso = s:siso_save
+doautoall SessionLoadPost
+" vim: set ft=vim :

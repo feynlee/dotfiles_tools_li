@@ -1,0 +1,31 @@
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal nofen
+silent! normal! zE
+1,166fold
+181,191fold
+205,305fold
+320,346fold
+360,396fold
+444,508fold
+523,532fold
+546,715fold
+729,934fold
+954,956fold
+1114,1149fold
+1165,1212fold
+1226,1785fold
+1816,1923fold
+1948,1955fold
+1974,2775fold
+lcd ~/OneDrive/Writings/Articles/Interpolation_Spinor/Previous\ Versions
+let &so = s:so_save | let &siso = s:siso_save
+doautoall SessionLoadPost
+" vim: set ft=vim :
