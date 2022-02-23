@@ -52,8 +52,8 @@ tags
 
 # Extra - Li
 **/tmp/*
-# **/Vundle.vim
-# **/bundle/*
+**/Vundle.vim
+**/bundle/*
 **/.vim/view/*
 
 !**/.gitkeep
