@@ -53,8 +53,9 @@ tags
 # Extra - Li
 **/tmp/*
 **/Vundle.vim
-**/bundle/*
-**/.vim/view/*
+.vim/bundle/*
+.vim/bundle/
+.vim/view/*
 
 !**/.gitkeep
 .ohmyzsh_customization/plugins/
