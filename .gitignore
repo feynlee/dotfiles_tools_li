@@ -54,7 +54,7 @@ tags
 **/tmp/*
 # **/Vundle.vim
 # **/bundle/*
-# **/.vim/view/*
+**/.vim/view/*
 
 !**/.gitkeep
 .ohmyzsh_customization/plugins/
