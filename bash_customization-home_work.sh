@@ -2,18 +2,24 @@ export FIRST_HOME="$CODE_HOME/Data_analysis/First"
 export DAVINCI_HOME="$CODE_HOME/Data_analysis/First/davinci"
 export VESTA_HOME="$CODE_HOME/Data_analysis/First/vesta"
 export DATA_HOME="$CODE_HOME/Data_analysis/First/data"
-export PYTHONPATH=$PYTHONPATH:/Applications/Anaconda3
+export PYTHONPATH=/Applications/Anaconda3
 # export PYTHONPATH=$PYTHONPATH:/Applications/Python_libs/aws-glue-libs
-export PATH=$PATH:$PYTHONPATH
-export PATH=$PATH:~/App_build
 
 export HADOOP_OPTS="-Djava.library.path=$HADOOP_INSTALL/lib/native"
 export PYTHONIOENCODING="utf-8"
 export PYTHONDONTWRITEBYTECODE=""
 
-export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
-# export JAVA_HOME="/Library/Java/Home"
-export SPARK_HOME=/Applications/App_build/spark-2.4.3-bin-hadoop2.8
+# export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+# export SPARK_HOME=/Applications/App_build/spark-2.4.3-bin-hadoop2.8
+
+export HOMEBREW_OPT="/usr/local/opt"
+export JAVA_HOME=$HOMEBREW_OPT/openjdk@11
+export SPARK_HOME=$HOMEBREW_OPT/apache-spark/libexec
+export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.9.5-src.zip:$PYTHONPATH
+export PYTHONPATH='/Users/ziyue.li/Library/Application Support/pdm/venv/lib/python3.7/site-packages/pdm/pep582':$PYTHONPATH
+export PATH=$JAVA_HOME/bin:$SPARK_HOME/bin:$PYTHONPATH:$PATH
+export PATH=$PATH:~/App_build
+
 export PYSPARK_DRIVER_PYTHON="jupyter"
 export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
 export PYSPARK_PYTHON="/Applications/Anaconda3/envs/py37/bin/python"
@@ -55,6 +61,12 @@ load_scored_data_to_predictive_addresses() {
 	which python
 	python $FIRST_HOME/automation-services/vesta_pipeline/scripts/import_scores.py "$@"
 	conda deactivate
+}
+
+ebi_test() {
+	conda activate py37
+	python $FIRST_HOME/ebi-elt/scripts/build_image.py
+	python $FIRST_HOME/ebi-elt/scripts/start_container.py
 }
 
 presign_url() {

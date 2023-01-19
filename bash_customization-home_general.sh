@@ -45,6 +45,24 @@ alias link_dotfiles="stow -v -R -t ~ ."
 # 	  echo -ne '\e[5 q' # Use beam shape cursor on startup.
 # 	  preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
+gemail () {
+	git filter-branch --env-filter '
+	OLD_EMAIL="$1"
+	CORRECT_NAME="Ziyue Li"
+	CORRECT_EMAIL="$2"
+	if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
+	then
+		export GIT_COMMITTER_NAME="$CORRECT_NAME"
+		export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"
+	fi
+	if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]
+	then
+		export GIT_AUTHOR_NAME="$CORRECT_NAME"
+		export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"
+	fi
+	' --tag-name-filter cat -- --branches --tags
+}
+
 
 # convenient functions
 gcdot () {
@@ -103,9 +121,8 @@ recompile_ycm () {
 
 # nbdev
 nbdev_proc () {
-	nbdev_build_lib
-	nbdev_build_docs
-	nbdev_diff_nbs
+	nbdev_prepare
+	nbdev_docs
 }
 
 # FAST.AI

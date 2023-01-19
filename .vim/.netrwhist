@@ -1,7 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/Users/ziyueli/.vim/startup'
-let g:netrw_dirhist_2='/Users/ziyue/OneDrive/Programming/Python/Dataincubator/test/Sumbission_form'
-let g:netrw_dirhist_3='/Users/ziyue/OneDrive/Code/sites/jekyll-gulp-sass-browser-sync-master'
-let g:netrw_dirhist_4='/Users/ziyue/Code/dotfiles/.vim/bundle/Vundle.vim'
-let g:netrw_dirhist_5='/home/ubuntu/Code/dotfiles/dotfiles_tools_li/.vim/bundle/Vundle.vim'
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/Users/ziyue.li/.oh-my-zsh'
+let g:netrw_dirhist_2='/Users/ziyue.li/Code/Data_Analysis/First/pikaQ/__pypackages__/3.9/lib/fastcore'
+let g:netrw_dirhist_1='/Users/ziyue.li/Code/Data_Analysis/First/augment-services/.git'
